@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -70,8 +71,27 @@ public class Player : MonoBehaviour
     {
         if (IsCaptain)
         {
-            //float angle = // Your code here
-            //Debug.Log(angle);
+            // Find the direction vector between captain and player
+            Vector3 direction = OtherPlayer.transform.position - transform.position;
+            // Draw arrow from captain to player
+            DebugExtension.DebugArrow(transform.position, direction, Color.black);
+            // Draw foward vector
+            DebugExtension.DebugArrow(transform.position, transform.forward, Color.blue);
+
+            // Find the angle between captain's forward vector and direction vector 
+            float angle = Vector3.Angle(transform.forward, direction);
+            // Debug.Log(angle);
+            // Find the dot product of two vectors
+            float dot = Vector3.Dot(transform.right, direction);
+
+            // Check if it is a anticlockise dot product
+            if (dot < 0)
+            {
+                // Find the clockwise angle
+                angle = 360 - angle;
+            }
+
+            Debug.Log("Angle is " + angle + " degrees");
         }
     }
 }

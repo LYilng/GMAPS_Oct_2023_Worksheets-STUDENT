@@ -173,7 +173,6 @@ public class VectorExercises : MonoBehaviour
         DebugExtension.DebugArrow(offset, norA.ToUnityVector3(), Color.green, 60f);
     }
 
-    // This question is done with the help of ChatGPT as i do not know what the question is even asking for
     public void Projection()
     {
         HVector2D a = new HVector2D(0, 0);
