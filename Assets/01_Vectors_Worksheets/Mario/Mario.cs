@@ -36,7 +36,7 @@ public class Mario : MonoBehaviour
         rb.AddForce(-gravityNorm * gravityStrength);
 
         // Calculates the angle between the vector gravityNorm and moveDir 
-        float angle = Vector3.SignedAngle(gravityNorm, gravityDir, Vector3.forward);
+        float angle = Vector3.SignedAngle(Vector3.right, moveDir, Vector3.forward);
 
         // Rotato to align the object based on gravity force
         rb.MoveRotation(Quaternion.Euler(0, 0, angle));
