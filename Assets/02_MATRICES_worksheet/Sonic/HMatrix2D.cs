@@ -9,14 +9,17 @@ public class HMatrix2D
     public HMatrix2D()
     {
         // your code here
+        // Initialize the matrix to an identity matrix
         setIdentity();
     }
 
     public HMatrix2D(float[,] multiArray)
     {
         // your code here
+        // Loop through each element in the provided array
         for (int y = 0; y < 3; y++)
         {
+            // Copy the values from the array to the matrix's entries
             for (int x = 0; x < 3; x++)
             {
                 entries[y, x] = multiArray[y, x];
@@ -29,6 +32,7 @@ public class HMatrix2D
              float m20, float m21, float m22)
     {
         // First row
+        // Assign the values to the elements in the matrix
         // your code here
         entries[0, 0] = m00;
         entries[0, 1] = m01;
@@ -48,6 +52,8 @@ public class HMatrix2D
     public static HMatrix2D operator +(HMatrix2D left, HMatrix2D right)
     {
         HMatrix2D result = new HMatrix2D();
+
+        // Iterate through each element and add corresponding elements from left and right matrices
         for (int y = 0; y < 3; y++)
         {
             for (int x = 0; x < 3; x++)
@@ -61,6 +67,8 @@ public class HMatrix2D
     public static HMatrix2D operator -(HMatrix2D left, HMatrix2D right)
     {
         HMatrix2D result = new HMatrix2D();
+
+        // Iterate through each element and subtract corresponding elements from left to rght matrices
         for (int y = 0; y < 3; y++)
         {
             for (int x = 0; x < 3; x++)
@@ -74,6 +82,8 @@ public class HMatrix2D
     public static HMatrix2D operator *(HMatrix2D left, float scalar)
     {
         HMatrix2D result = new HMatrix2D();
+
+        // Multiply each element of the matrix by the scalar value
         for (int y = 0; y < 3; y++)
         {
             for (int x = 0; x < 3; x++)
@@ -88,8 +98,10 @@ public class HMatrix2D
     //
     public static HVector2D operator *(HMatrix2D left, HVector2D right)
     {
+        // Matrix-vector multiplication
         float x = left.entries[0, 0] * right.x + left.entries[0, 1] * right.y + left.entries[0, 2];
         float y = left.entries[1, 0] * right.x + left.entries[1, 1] * right.y + left.entries[1, 2];
+        // Retrun the results
         return new HVector2D(x, y);
     }
 
@@ -99,6 +111,7 @@ public class HMatrix2D
     {
         return new HMatrix2D
         (
+            // Matrix multiplication operator
             /* 
                 00 01 02    00 xx xx
                 xx xx xx    10 xx xx
@@ -124,12 +137,17 @@ public class HMatrix2D
 
     public static bool operator ==(HMatrix2D left, HMatrix2D right)
     {
+        // Iterate through each element of the matrices
         for (int y = 0; y < 3; y++)
             for (int x = 0; x < 3; x++)
+            // Check if corresponding element are not equal, if inequality is found, matrices are not equal
                 if (left.entries[y, x] != right.entries[y, x]) return false;
+
+        // If not found, matrices are equal
         return true;
     }
 
+    // Same as == operator but reversed
     public static bool operator !=(HMatrix2D left, HMatrix2D right)
     {
         for (int y = 0; y < 3; y++)
@@ -160,6 +178,7 @@ public class HMatrix2D
 
     public void setIdentity()
     {
+        // Set the matrix into an identity matrix
         // your code here
         for (int y = 0; y < 3; y++)
         {
@@ -173,10 +192,11 @@ public class HMatrix2D
                 //         {
                 //             entries[y,x] = 0;
                 //         }
+
+                // Set the vales to 1 or 0
                 entries[y, x] = (x == y) ? 1 : 0;
             }
         }
-
     }
 
     public void setTranslationMat(float transX, float transY)
@@ -184,10 +204,10 @@ public class HMatrix2D
         // your code here
         setIdentity();
 
-        // Update the matrix
+        // Update the matrix with translation values
         entries[0, 2] = transX;
         entries[1, 2] = transY;
-        }
+    }
 
     public void setRotationMat(float rotDeg)
     {
