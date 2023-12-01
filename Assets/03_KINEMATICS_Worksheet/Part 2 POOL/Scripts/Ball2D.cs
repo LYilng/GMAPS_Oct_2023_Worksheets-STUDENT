@@ -25,7 +25,9 @@ public class Ball2D : MonoBehaviour
 
     public bool IsCollidingWith(float x, float y)
     {
+        // Calculate the distance between the specified point x,y and the center of the object
         float distance = Mathf.Sqrt(Mathf.Pow(x - Position.x, 2) + Mathf.Pow(y - Position.y, 2));
+        // Check if the calculated distance is less than or equal to the object's radius
         return distance <= Radius;
     }
 
@@ -42,12 +44,15 @@ public class Ball2D : MonoBehaviour
 
     private void UpdateBall2DPhysics(float deltaTime)
     {
+        // Calculate the displacement in the x and y aces based on the current velocity and time passed
         float displacementX = Velocity.x * deltaTime;
         float displacementY = Velocity.y * deltaTime;
 
+        // Update the ball's position by adding the calculated displacements
         Position.x += displacementX;
         Position.y += displacementY;
 
+        // Update the Unity transform position to match the new 2D position
         transform.position = new Vector2(Position.x, Position.y);
     }
 }
